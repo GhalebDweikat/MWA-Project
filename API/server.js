@@ -1,6 +1,7 @@
 const express = require('express');
 const logger = require('morgan');
-const products = require('./routes/products') ;
+const products = require('./routes/products');
+const cart = require('./routes/cart');
 const users = require('./routes/users');
 const bodyParser = require('body-parser');
 const mongoose = require('./config/database'); //database configuration
@@ -22,6 +23,7 @@ app.get('/', function(req, res){
 app.use('/users', users);
 
 app.use('/products', validateUser, products);
+app.use('/cart', validateUser, cart);
 
 app.get('/favicon.ico', function(req, res) {
     res.sendStatus(204);
