@@ -21,6 +21,7 @@ const UserSchema = new Schema({
     }
 });
 
+UserSchema.virtual('userId').get(() => this._id);
 UserSchema.pre('save', function(next){
     this.password = bcrypt.hashSync(this.password, saltRounds);
     next();

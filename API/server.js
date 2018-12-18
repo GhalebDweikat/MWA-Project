@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const logger = require('morgan');
 const products = require('./routes/products');
 const cart = require('./routes/cart');
@@ -8,6 +9,8 @@ const mongoose = require('./config/database'); //database configuration
 var jwt = require('jsonwebtoken');
 
 const app = express();
+
+app.use(cors());
 
 app.set('secretKey', 'Qs@FAln%cASDfsfsdF@#'); // jwt secret token
 
