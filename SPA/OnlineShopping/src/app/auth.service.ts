@@ -30,6 +30,9 @@ export class AuthService {
   private setSession(authResult) {
     const expiresAt = moment().add(1,'hour');
     console.log(authResult.data.token);
+    if(authResult.data.name == "Ghaleb"){
+      localStorage.setItem('admin', true);
+    }
     localStorage.setItem('id_token', authResult.data.token);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
   }
@@ -37,6 +40,10 @@ export class AuthService {
   logout() {
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
+  }
+
+  public isAdmin(){
+    return localStorage.getItem('admin');
   }
 
   public isLoggedIn() {
