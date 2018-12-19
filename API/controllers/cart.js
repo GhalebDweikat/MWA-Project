@@ -14,19 +14,32 @@ module.exports = {
         });
     },
     addProduct: function(req, res, next) {
+
         cartModel.findOne({userId: req.body.userId, checkedOut: false}, function (err, cart) {
-            cart.products.push(req.param.productId);
-            cart.save((err, newCart) => {
-                if (err)
-                    next(err);
-                else
-                    res.json({status: "Success", message: "Cart Updated", data: newCart});
-            })
+            if(!cart)
+            {
+                let newCart = new cartModel({userId: req.body.userId, products: [req.body.productId], total: 0, checkedOut: false});
+                newCart.save((err, c) =>{
+                    if (err)
+                        next(err);
+                    else
+                        res.json({status: "Success", message: "Cart Updated", data: c});
+                })
+            }
+            else {
+                cart.products.push(req.body.productId);
+                cart.save((err, newCart) => {
+                    if (err)
+                        next(err);
+                    else
+                        res.json({status: "Success", message: "Cart Updated", data: newCart});
+                })
+            }
         });
     },
     removeProduct: function(req, res, next) {
         cartModel.findOne({userId: req.body.userId, checkedOut: false}, function (err, cart) {
-            cart.products.pop(req.param.productId);
+            cart.products.pop(req.body.productId);
             cart.save((err, newCart) => {
                 if (err)
                     next(err);

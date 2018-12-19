@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,7 +13,9 @@ import { ShoppingComponent } from './shopping/shopping.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductComponent } from './product/product.component';
 import { AddProductComponent } from './add-product/add-product.component';
-import {DataService} from "./data.service";
+import { DataService } from "./data.service";
+import {reducer} from "./redux/cart.reducer";
+
 
 
 @NgModule({
@@ -32,6 +35,7 @@ import {DataService} from "./data.service";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forRoot({ cart: reducer })
 
   ],
   providers: [AuthService, DataService],

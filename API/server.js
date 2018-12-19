@@ -17,7 +17,7 @@ app.set('secretKey', 'Qs@FAln%cASDfsfsdF@#'); // jwt secret token
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.get('/', function(req, res){
     res.json({"API" : "Online"});
 });

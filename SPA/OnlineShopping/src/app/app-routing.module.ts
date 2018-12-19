@@ -14,7 +14,8 @@ const routes: Routes = [{path: 'login', component: LoginComponent},
                         {path: 'product', component: ProductComponent, canActivate:[CanActivateGuard]},
                         {path: 'shopping', component: ShoppingComponent, canActivate:[CanActivateGuard]},
                         {path: 'cart', component: CartComponent, canActivate:[CanActivateGuard]},
-                        {path: 'add-product', component: AddProductComponent, canActivate:[CanActivateGuard, AdminGuard]}];
+                        {path: 'add-product', component: AddProductComponent, canActivate:[CanActivateGuard, AdminGuard]},
+                        {path: '*', component: LoginComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

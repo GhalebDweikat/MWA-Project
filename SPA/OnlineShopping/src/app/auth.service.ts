@@ -30,8 +30,9 @@ export class AuthService {
   private setSession(authResult) {
     const expiresAt = moment().add(1,'hour');
     console.log(authResult.data.token);
-    if(authResult.data.name == "Ghaleb"){
-      localStorage.setItem('admin', true);
+
+    if(authResult.data.user.name == "Ghaleb"){
+      localStorage.setItem('admin', "true");
     }
     localStorage.setItem('id_token', authResult.data.token);
     localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
@@ -43,7 +44,7 @@ export class AuthService {
   }
 
   public isAdmin(){
-    return localStorage.getItem('admin');
+    return localStorage.getItem('admin') === "true";
   }
 
   public isLoggedIn() {
@@ -52,6 +53,11 @@ export class AuthService {
 
   isLoggedOut() {
     return !this.isLoggedIn();
+  }
+
+  public getToken(){
+    return localStorage.getItem('id_token');
+
   }
 
   getExpiration() {

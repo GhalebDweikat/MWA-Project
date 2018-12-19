@@ -23,6 +23,8 @@ import { AuthService } from "../auth.service";
         <button class="button button-primary" 
                 (click)="login()">Login</button>
     </div>
+  
+    <a [routerLink]="['../signup']">Sign Up Here</a>
 </form>`,
   styleUrls: ['./login.component.css']
 })
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
           () => {
             console.log("User is logged in");
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/shopping');
           }
         );
     }
